@@ -1,3 +1,5 @@
+//Code with vscode 1.60.2, x86_64-posix-she-rev0 gcc 8.1.0
+
 #include <cstdlib>
 #include <iostream>
 #include <ctime>
@@ -6,9 +8,9 @@
 using namespace std;
 
 int main() {
-    srand(time(NULL));
-    int my_num[4], input_data, in_num[4], i, j, a_num, b_num, try_num = 1, num, temp, length = 0;
-    string input_dat;
+    srand(time(0));
+    int my_num[4], input_data, in_num[4], i, j, a_num = 0, b_num = 0, try_num = 1, num, temp, length = 0;
+    string input_data_str;
     for (i = 0; i <= 3; i++) {
         my_num[i] = (rand() % 9 + 1);
     }
@@ -23,16 +25,14 @@ int main() {
     }
     num = my_num[0] * 1000 + my_num[1] * 100 + my_num[2] * 10 + my_num[3];
     INPUT:
-    a_num = 0;
-    b_num = 0;
     if (try_num == 11) {
         cout << "You lose. The answer is " << num << endl;
         goto END;
     }
     cout << try_num << "/" << 10 << ". Input the number you guess:";
-    cin >> input_dat;
-    if (all_of(input_dat.begin(), input_dat.end(), ::isdigit)) {
-        input_data = atoi(input_dat.c_str());
+    cin >> input_data_str;
+    if (all_of(input_data_str.begin(), input_data_str.end(), ::isdigit)) {
+        input_data = atoi(input_data_str.c_str());
         temp = input_data;
         while (temp) {
             temp /= 10;
