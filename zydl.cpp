@@ -1,5 +1,3 @@
-// Coding with Visual Studio Code, Mingw64 6.0 and CMake 3.20.2
-
 #include <cstdlib>
 #include <iostream>
 #include <ctime>
