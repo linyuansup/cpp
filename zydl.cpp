@@ -16,9 +16,9 @@ using namespace std;
 
 int main()
 {
-    srand(time(0));
     int my_num[4], input_data, in_num[4], i, j, a_num = 0, b_num = 0, try_num = 1, num, temp, length = 0;
     string input_data_str;
+    srand(time(0));
     for (i = 0; i <= 3; i++)
     {
         my_num[i] = (rand() % 9 + 1);
@@ -42,8 +42,6 @@ INPUT:
     if (all_of(input_data_str.begin(), input_data_str.end(), ::isdigit))
     {
         input_data = atoi(input_data_str.c_str());
-        temp = input_data;
-        length = 0;
         in_num[3] = input_data / 1 % 10;
         in_num[2] = input_data / 10 % 10;
         in_num[1] = input_data / 100 % 10;
@@ -56,6 +54,8 @@ INPUT:
                 goto INPUT;
             }
         }
+        temp = input_data;
+        length = 0;
         while (temp)
         {
             temp /= 10;
