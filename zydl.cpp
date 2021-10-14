@@ -1,3 +1,10 @@
+/*
+ * @Author: 李天阳_linyuansup 
+ * @Date: 2021-10-14 19:48:09 
+ * @Last Modified by:   李天阳_linyuansup 
+ * @Last Modified time: 2021-10-14 19:48:09 
+ */
+
 //Code with vscode 1.60.2, x86_64-posix-she-rev0 gcc 8.1.0
 
 #include <cstdlib>
@@ -30,11 +37,6 @@ CHECK:
     }
     num = my_num[0] * 1000 + my_num[1] * 100 + my_num[2] * 10 + my_num[3];
 INPUT:
-    if (try_num == 11)
-    {
-        cout << "You lose. The answer is " << num << endl;
-        goto END;
-    }
     cout << try_num << "/" << 10 << ". Input the number you guess:";
     cin >> input_data_str;
     if (all_of(input_data_str.begin(), input_data_str.end(), ::isdigit))
@@ -42,16 +44,6 @@ INPUT:
         input_data = atoi(input_data_str.c_str());
         temp = input_data;
         length = 0;
-        while (temp)
-        {
-            temp /= 10;
-            length++;
-        }
-        if (length != 4)
-        {
-            cout << "You can only input a number with four digits. Please retry." << endl;
-            goto INPUT;
-        }
         in_num[3] = input_data / 1 % 10;
         in_num[2] = input_data / 10 % 10;
         in_num[1] = input_data / 100 % 10;
@@ -63,6 +55,16 @@ INPUT:
                 cout << "You cannot input data with 0. Please retry." << endl;
                 goto INPUT;
             }
+        }
+        while (temp)
+        {
+            temp /= 10;
+            length++;
+        }
+        if (length != 4)
+        {
+            cout << "You can only input a number with four digits. Please retry." << endl;
+            goto INPUT;
         }
         for (i = 0; i <= 2; i++)
         {
@@ -89,25 +91,25 @@ INPUT:
                 if (in_num[i] == my_num[j])
                 {
                     if (i == j)
-                    {
                         a_num++;
-                    }
                     else
-                    {
                         b_num++;
-                    }
                 }
             }
         }
         cout << "A" << a_num << "B" << b_num << endl;
         try_num++;
-        goto INPUT;
+        if (try_num == 11)
+        {
+            cout << "You lose. The answer is " << num << endl;
+            goto END;
+        }
     }
     else
     {
         cout << "You can only input number. Please retry." << endl;
-        goto INPUT;
     }
+    goto INPUT;
 END:
     return 0;
 }
