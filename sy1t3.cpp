@@ -2,7 +2,7 @@
  * @Author: 李天阳_linyuansup
  * @Date: 2021-10-19 20:14:22
  * @LastEditors: 李天阳_linyuansup
- * @LastEditTime: 2021-10-19 20:22:37
+ * @LastEditTime: 2021-10-20 16:24:50
  * @FilePath: \cpp\sy1t3.cpp
  */
 
@@ -10,7 +10,8 @@
 using namespace std;
 int main()
 {
-    int month, room, money;
+    int month, room;
+    double money;
     cout << "Enter the month and room you want:";
     cin >> month >> room;
     if (month >= 7 && month <= 9)
@@ -27,6 +28,6 @@ int main()
         else
             money = 278.6;
     }
-    cout << "the money is " << money << endl;
+    cout << "the money is " << money * room << endl;
     return 0;
 }
