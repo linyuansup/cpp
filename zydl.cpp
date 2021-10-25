@@ -1,4 +1,4 @@
-//Code with vscode 1.60.2, x86_64-posix-she-rev0 gcc 8.1.0
+//Code with vscode 1.62.0, gcc 9.3.0 (g++-9) on Windows 11 with WSL2: Ubuntu 20.04.3 LTS
 
 #include <cstdlib>
 #include <iostream>
