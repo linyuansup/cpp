@@ -9,10 +9,10 @@
                 "-g",
                 "${file}",
                 "-o",
-                "${fileDirname}/bin/${fileBasenameNoExtension}"
+                "/home/linyuansup/code/cpp/bin/${fileBasenameNoExtension}"
             ],
             "options": {
-                "cwd": "${fileDirname}"
+                "cwd": "/home/linyuansup/code/cpp"
             },
             "problemMatcher": [
                 "$gcc"
