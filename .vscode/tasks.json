@@ -2,17 +2,17 @@
     "tasks": [
         {
             "type": "cppbuild",
-            "label": "C/C++: g++-9 生成活动文件",
-            "command": "/usr/bin/g++-9",
+            "label": "C/C++: g++.exe 生成活动文件",
+            "command": "C:\\Program Files\\mingw64\\bin\\g++.exe",
             "args": [
                 "-fdiagnostics-color=always",
                 "-g",
                 "${file}",
                 "-o",
-                "/home/linyuansup/code/cpp/bin/${fileBasenameNoExtension}"
+                "D:\\Code\\cpp\\bin\\${fileBasenameNoExtension}.exe"
             ],
             "options": {
-                "cwd": "/home/linyuansup/code/cpp"
+                "cwd": "${fileDirname}"
             },
             "problemMatcher": [
                 "$gcc"
