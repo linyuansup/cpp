@@ -25,11 +25,8 @@ bool isPalindromes(int n)
 }
 int main()
 {
-    int n;
-    cin >> n;
-    if (isPalindromes(n))
-        cout << "true";
-    else
-        cout << "false";
+    for (int i = 11; i <= 1000; i++)
+        if (isPalindromes(i))
+            cout << i << " ";
     return 0;
 }
