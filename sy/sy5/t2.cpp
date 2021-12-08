@@ -16,13 +16,11 @@ int main()
     {
         bool sta = true;
         for (int j = 0; id[j]; j++)
-        {
             if (stu[i].get_id()[j] != id[j])
             {
                 sta = false;
                 break;
             }
-        }
         if (sta)
             stu[i].show_info();
     }
