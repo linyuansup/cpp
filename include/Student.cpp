@@ -1,45 +1,20 @@
 #include "Student.h"
-using namespace std;
-Student::Student(const char *p1, const char *p2, double _math, double _phy, double _eng)
+Student::Student(string name, string id, string sex, string major, string grade) : Person(name, id, sex)
 {
-    if (p1)
-        for (int i = 0; i < 10; i++)
-            id[i] = p1[i];
-    if (p2)
-        for (int i = 0; i < 10; i++)
-            name[i] = p2[i];
-    math = _math;
-    physics = _phy;
-    english = _eng;
+    this->major = major;
+    this->grade = grade;
 }
-void Student::set_info(const char *p1, const char *p2, double _math, double _phy, double _eng)
+string Student::get_major()
 {
-    int i = 0;
-    for (i = 0; i < 10; i++)
-        id[i] = p1[i];
-    id[i] = '\0';
-    for (i = 0; i < 10; i++)
-        name[i] = p2[i];
-    name[i] = '\0';
-    math = _math;
-    physics = _phy;
-    english = _eng;
-    return;
+    return major;
 }
-double Student::total()
+string Student::get_grade()
 {
-    return math + physics + english;
+    return grade;
 }
-char *Student::get_id()
+void Student::print_info()
 {
-    return id;
-}
-void Student::show_info()
-{
-    cout << "ID: " << id << endl;
-    cout << "姓名: " << name << endl;
-    cout << "数学成绩: " << math << endl;
-    cout << "物理成绩: " << physics << endl;
-    cout << "英语成绩: " << english << endl;
-    return;
+    Person::print_info();
+    cout << "Major: " << major << endl
+         << "Grade: " << grade << endl;
 }
