@@ -3,5 +3,6 @@ Student_assistant::Student_assistant(string name, string id, string sex, string 
 void Student_assistant::print_info()
 {
     Student::print_info();
-    Assistant::print_info();
+    cout << "School: " << school << endl
+         << "Salary: " << salary << endl;
 }
