@@ -6,6 +6,12 @@
         "typeinfo": "cpp",
         "string_view": "cpp",
         "regex": "cpp",
-        "ostream": "cpp"
+        "ostream": "cpp",
+        "bitset": "cpp",
+        "iosfwd": "cpp",
+        "*.tcc": "cpp",
+        "complex": "cpp",
+        "iomanip": "cpp",
+        "istream": "cpp"
     }
 }
