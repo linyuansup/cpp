@@ -1,0 +1,7 @@
+Generating random array for 200...
+Generate fininshed in 0 seconds.
+Sorting..
+Sort fininshed in 0 seconds.
+Checking..
+Check fininshed in 0 seconds.
+

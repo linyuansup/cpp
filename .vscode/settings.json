@@ -12,6 +12,11 @@
         "*.tcc": "cpp",
         "complex": "cpp",
         "iomanip": "cpp",
-        "istream": "cpp"
+        "istream": "cpp",
+        "cmath": "cpp",
+        "deque": "cpp",
+        "forward_list": "cpp",
+        "list": "cpp",
+        "new": "cpp"
     }
 }
