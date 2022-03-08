@@ -22,12 +22,13 @@ void bucketSort(int arr[], unsigned long int len)
 }
 int main()
 {
-    freopen("out.txt", "w", stdout);
+    // freopen("out.txt", "w", stdout);
     unsigned seed = time(0);
     srand(seed);
     clock_t start, end;
     for (unsigned long int i = 200000000; i <= 1000000000; i += 200000000)
     {
+        i = 4294967295;
         cout << "Generating random array for " << i << "..." << endl;
         start = clock();
         int *p = new int[i];
@@ -52,6 +53,7 @@ int main()
         cout << "Check fininshed in " << double(end - start) / CLOCKS_PER_SEC << " seconds." << endl;
         cout << endl;
         delete[] p;
+        return 0;
     }
     return 0;
 }

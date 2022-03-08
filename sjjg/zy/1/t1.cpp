@@ -53,12 +53,13 @@ inline void quickSort(int a[], int left, int right)
 }
 int main()
 {
-    freopen("out.txt", "w", stdout);
+    // freopen("out.txt", "w", stdout);
     unsigned seed = time(0);
     srand(seed);
     clock_t start, end;
     for (unsigned long int i = 200;; i += 200000000)
     {
+        i = 500000000;
         cout << "Generating random array for " << i << "..." << endl;
         start = clock();
         int *p = new int[i];
@@ -82,8 +83,8 @@ int main()
         end = clock();
         cout << "Check fininshed in " << double(end - start) / CLOCKS_PER_SEC << " seconds." << endl;
         cout << endl;
-        return 0;
         delete[] p;
+        return 0;
     }
     return 0;
 }

@@ -17,6 +17,25 @@
         "deque": "cpp",
         "forward_list": "cpp",
         "list": "cpp",
-        "new": "cpp"
+        "new": "cpp",
+        "bit": "cpp",
+        "charconv": "cpp",
+        "string": "cpp",
+        "unordered_map": "cpp",
+        "unordered_set": "cpp",
+        "vector": "cpp",
+        "optional": "cpp",
+        "fstream": "cpp",
+        "future": "cpp",
+        "ios": "cpp",
+        "limits": "cpp",
+        "mutex": "cpp",
+        "ranges": "cpp",
+        "sstream": "cpp",
+        "streambuf": "cpp",
+        "system_error": "cpp",
+        "type_traits": "cpp",
+        "tuple": "cpp",
+        "variant": "cpp"
     }
 }
