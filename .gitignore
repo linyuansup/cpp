@@ -1,3 +1,2 @@
-/include/temp.cpp
-/bin
-temp.cpp
+/cmake-build-debug/
+/.idea/

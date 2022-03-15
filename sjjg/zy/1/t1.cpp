@@ -59,23 +59,25 @@ int main()
     clock_t start, end;
     for (unsigned long int i = 200;; i += 200000000)
     {
-        i = 500000000;
-        cout << "Generating random array for " << i << "..." << endl;
-        start = clock();
-        int *p = new int[i];
-        for (unsigned long int j = 0; j < i; j++)
-            p[j] = rand();
-        end = clock();
-        cout << "Generate fininshed in " << double(end - start) / CLOCKS_PER_SEC << " seconds." << endl;
-        cout << "Sorting.." << endl;
-        start = clock();
-        quickSort(p, 0, i - 1);
-        end = clock();
-        cout << "Sort fininshed in " << double(end - start) / CLOCKS_PER_SEC << " seconds." << endl;
-        cout << "Checking.." << endl;
-        start = clock();
-        for (unsigned long int j = 1; j < i; j++)
-            if (p[j] < p[j - 1])
+		i = 100;
+		cout << "Generating random array for " << i << "..." << endl;
+		start = clock();
+		int* p = new int[i];
+		for (unsigned long int j = 0; j < i; j++)
+			p[j] = rand();
+		end = clock();
+		for (int j = 0; j < 100; j++)
+			cout << " " << p[j];
+		cout << "Generate fininshed in " << double(end - start) / CLOCKS_PER_SEC << " seconds." << endl;
+		cout << "Sorting.." << endl;
+		start = clock();
+		quickSort(p, 0, i - 1);
+		end = clock();
+		cout << "Sort fininshed in " << double(end - start) / CLOCKS_PER_SEC << " seconds." << endl;
+		cout << "Checking.." << endl;
+		start = clock();
+		for (unsigned long int j = 1; j < i; j++)
+			if (p[j] < p[j - 1])
             {
                 cout << "Error!" << endl;
                 return 0;

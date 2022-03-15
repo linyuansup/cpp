@@ -1,77 +1,106 @@
-#include "stack.h"
 #include <iostream>
-#include <string>
+#include "stack.h"
 using namespace std;
-inline int level(const char a)
+inline bool judge(char x)
 {
-    switch (a)
-    {
-    case '#':
-        return 0;
-    case ')':
-        return 1;
-    case '+':
-    case '-':
-        return 2;
-    case '*':
-    case '/':
-        return 3;
-    case '(':
-        return 4;
-    }
-    return -1;
+	if (x == '+' || x == '-' || x == '*' || x == '/' || x == ')' || x == '#')
+		return true;
+	return false;
 }
-inline int calculate(int a, int b, char ope)
+inline int calculate(int x, int y, char z)
 {
-    switch (ope)
-    {
-    case '+':
-        return a + b;
-    case '-':
-        return a - b;
-    case '*':
-        return a * b;
-    case '/':
-        return a * b;
-    }
-    return -1;
+	switch (z)
+	{
+	case '+':
+		return x + y;
+	case '-':
+		return x - y;
+	case '*':
+		return x * y;
+	case '/':
+		return x / y;
+	default:
+		return 0;
+	}
+}
+inline int priority(char x)
+{
+	switch (x)
+	{
+	case '#':
+		return 0;
+	case '(':
+	case ')':
+		return 1;
+	case '+':
+	case '-':
+		return 2;
+	case '*':
+	case '/':
+		return 3;
+	default:
+		return -1;
+	}
 }
 int main()
 {
-    Stack<int> num;
-    Stack<char> ope;
-    string a;
-    int temp = 0;
-    e_code ec;
-    cin >> a;
-    for (int i = 0; i < a.size(); i++)
-    {
-        if (a[i] >= '0' && a[i] <= '9')
-        {
-            temp *= 10;
-            temp += a[i] - '0';
-        }
-        else
-        {
-            if (temp != 0)
-            {
-                ec = num.push(temp);
-                temp = 0;
-            }
-            char x;
-            ec = ope.get_top(x);
-            if (level(a[i]) > level(x))
-                ec = ope.push(a[i]);
-            else
-            {
-                int a, b;
-                a = num.pop();
-                b = num.pop();
-                ec = num.push(calculate(a, b, x));
-                ec = ope.pop();
-            }
-        }
-    }
-    cout << calculate(num.pop(), num.pop(), ope.pop()) << endl;
-    return 0;
+	stack<int> num;
+	stack<char> ope;
+	string s;
+	cin >> s;
+	int temp = 0;
+	ope.push(s[0]);
+	for (int i = 1; i < s.length(); i++)
+	{
+		if (s[i] >= '0' && s[i] <= '9')
+		{
+			temp *= 10;
+			temp += s[i] - '0';
+			continue;
+		}
+		if (s[i] == '(')
+		{
+			ope.push(s[i]);
+			continue;
+		}
+		if (judge(s[i]))
+		{
+			num.push(temp);
+			temp = 0;
+			char a;
+			for (;;)
+			{
+				ope.get_top(a);
+				if (priority(a) < priority(s[i]))
+				{
+					ope.push(s[i]);
+					break;
+				}
+				else if (a == '#' && s[i] == '#')
+					break;
+				else
+				{
+					int b, c;
+					num.get_top(b);
+					num.pop();
+					num.get_top(c);
+					num.pop();
+					ope.pop();
+					if (a == '(')
+					{
+						ope.get_top(a);
+						ope.pop();
+						i++;
+					}
+					num.push(calculate(c, b, a));
+					continue;
+				}
+			}
+			continue;
+		}
+	}
+	int result;
+	num.get_top(result);
+	cout << result;
+	return 0;
 }
