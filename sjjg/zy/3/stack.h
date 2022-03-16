@@ -6,67 +6,63 @@ enum e_code
 	underflow,
 	success
 };
-template<typename T>
-struct node
-{
-	T data;
-	node* next;
-};
+const int max_len = 10;
 template<class T>
 class stack
 {
 public:
 	stack();
-	~stack();
 	bool empty() const;
+	bool full() const;
 	e_code get_top(T& x);
 	e_code push(T x);
 	e_code pop();
 private:
-	node<T>* top;
+	int count;
+	T data[max_len];
 };
 #endif
 
 template<class T>
 stack<T>::stack()
 {
-	top = NULL;
+	count = 0;
 }
 template<class T>
 e_code stack<T>::pop()
 {
 	if (empty())
 		return underflow;
-	node<T>* u = top;
-	top = top->next;
-	delete u;
+	count--;
 	return success;
 }
 template<class T>
 bool stack<T>::empty() const
 {
-	return top == NULL;
+	return count == 0;
+}
+template<class T>
+bool stack<T>::full() const
+{
+	return count == max_len;
 }
 template<class T>
 e_code stack<T>::get_top(T& x)
 {
 	if (empty())
 		return overflow;
-	x = top->data;
-	return success;
+	else
+	{
+		x = data[count - 1];
+		return success;
+	}
 }
 template<class T>
 e_code stack<T>::push(const T x)
 {
-	node<T>* s = new node<T>;
-	s->data = x;
-	s->next = top;
-	top = s;
+	if (full())
+		return overflow;
+	data[count] = x;
+	count++;
 	return success;
-}
-template<class T>
-stack<T>::~stack()
-{
-	while (!empty())
-		pop();
 }
