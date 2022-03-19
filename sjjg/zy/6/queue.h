@@ -1,4 +1,3 @@
-#include <cstring>
 #ifndef QUEUE_H_INCLUDED
 #define QUEUE_H_INCLUDED
 
@@ -11,6 +10,7 @@ struct node
 
 enum e_code
 {
+	overflow,
 	underflow,
 	success
 };
@@ -67,7 +67,7 @@ template<class T>
 e_code queue<T>::serve()
 {
 	if (empty())
-		return underflow;
+		return overflow;
 	node<T>* u = front->next;
 	front->next = u->next;
 	delete u;
