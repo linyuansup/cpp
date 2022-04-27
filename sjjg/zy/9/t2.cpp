@@ -26,6 +26,7 @@ L2:
 	}
 	while (!s2.empty())
 	{
+		n = s2.top();
 		s2.pop();
 		goto L2;
 	}
