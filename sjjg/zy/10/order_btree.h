@@ -1,5 +1,5 @@
-#ifndef UNTITLED__ORDER_BTREE_H
-#define UNTITLED__ORDER_BTREE_H
+#ifndef LTY__ORDER_BTREE_H
+#define LTY__ORDER_BTREE_H
 #include <bits/stdc++.h>
 using namespace std;
 class order_btree
@@ -33,4 +33,4 @@ void order_btree::build(string s, int pos)
 		build(s, pos * 2 + 1);
 	}
 }
-#endif //UNTITLED__ORDER_BTREE_H
+#endif //LTY__ORDER_BTREE_H
