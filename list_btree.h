@@ -76,8 +76,14 @@ void tree::con(node*& pos)
 {
 	if (pos)
 	{
-		con(pos->left);
-		con(pos->right);
+		if (pos->left)
+			con(pos->left);
+		else
+			pos->isLChild = false;
+		if (pos->right)
+			con(pos->right);
+		else
+			pos->isRChild = false;
 		if (pos->left == nullptr)
 		{
 			pos->left = prev;
@@ -94,9 +100,9 @@ void tree::con(node*& pos)
 string tree::output()
 {
 	string result;
+	node* pCur = root;
 	if (root)
 	{
-		node* pCur = root;
 		prev = nullptr;
 		while (pCur != nullptr)
 		{
@@ -120,6 +126,6 @@ string tree::output()
 				pCur = pCur->right;
 		}
 	}
-	return "0";
+	return result;
 }
 #endif //LTY__LIST_BT_TREE_H
