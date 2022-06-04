@@ -1,93 +1,98 @@
-#ifndef CODE__GRAPH_H
-#define CODE__GRAPH_H
+#ifndef UNTITLED__GRAPH_H
+#define UNTITLED__GRAPH_H
 #include <vector>
 #include <string>
-#include <stack>
-#include <commctrl.h>
-
+#include <queue>
 using namespace std;
 
 class Graph
 {
-private:
-	struct node
-	{
-		node* next = nullptr;
-		int data{};
-	};
-	vector<node*> nodePour;
-	vector<int> parentNum;
-	void deleteChild(node* parent);
-	int nextNode(int nodeNum, vector<int> exception);
 public:
-	Graph() = default;
-	Graph(int n, string data);
-	vector<string> Tsort();
-	~Graph();
+	void setSize(int n);
+	void link(int start, int end);
+	queue<vector<int>> TSort();
+private:
+	vector<vector<int>> nodeData;
+	vector<queue<int>> choice;
+	void getChoice(int num);
+	void set(int num);
+	void reset(int num);
+	int size;
 };
-
-Graph::Graph(int n, string data)
+void Graph::link(int start, int end)
 {
-	parentNum.insert(parentNum.begin(), n, 0);
-	parentNum.resize(n);
-	nodePour.resize(n);
-	auto nodePourPos = nodePour.begin();
-	auto nowPos = *nodePourPos;
-	for (char& stringPos : data)
-		if (stringPos == '.')
-			nowPos = *(++nodePourPos);
-		else
+	nodeData[start - 1][end - 1] = 1;
+}
+void Graph::setSize(int n)
+{
+	nodeData.resize(n);
+	for (int i = 0; i < n; i++)
+		nodeData[i].resize(n);
+	choice.resize(n);
+	size = n;
+}
+void Graph::getChoice(int num)
+{
+	bool temp = false;
+	num--;
+	for (int i = 0; i < size; i++)
+	{
+		for (int j = 0; j < size; j++)
+			if (nodeData[j][i] == 1)
+			{
+				temp = true;
+				break;
+			}
+		if (temp)
 		{
-			nowPos = new node;
-			nowPos->data = stringPos - '0';
-			nowPos = nowPos->next;
-			parentNum[stringPos - '0']++;
+			choice[num].push(i);
+			temp = false;
 		}
-}
-
-void Graph::deleteChild(node* parent)
-{
-	stack<node*> child;
-	while (parent != nullptr)
-	{
-		child.push(parent);
-		parent = parent->next;
-	}
-	while (!child.empty())
-	{
-		parent = child.top();
-		parentNum[parent->data]--;
-		delete[] parent;
-		child.pop();
 	}
 }
-
-Graph::~Graph()
+void Graph::reset(int num)
 {
-	for (auto& pos : nodePour)
-		deleteChild(pos);
+	num--;
+	for (int i = 0; i < size; i++)
+		if (nodeData[num][i] == -2)
+			nodeData[num][i] = 0;
+		else
+			nodeData[num][i] = 1;
 }
-
-vector<string> Graph::Tsort()
+void Graph::set(int num)
 {
-	vector<string> returnData;
-	vector<int> path;
-	node* pos = nullptr;
-
+	num--;
+	for (int i = 0; i < size; i++)
+		if (nodeData[num][i] == 0)
+			nodeData[num][i] = -2;
+		else
+			nodeData[num][i] = -1;
+}
+queue<vector<int>> Graph::TSort()
+{
+	queue<vector<int>> returnData;
+	vector<int> thisData;
+	int nowData;
+	for (int i = 0; i < size; i++)
+	{
+		getChoice(i);
+		if (!(choice[i].empty()))
+		{
+			nowData = choice[i].front();
+			set(nowData);
+			thisData.insert(thisData.end(), nowData);
+			choice[i].pop();
+		}
+		if (i == size - 1 || choice[i].empty())
+		{
+			if (i == size - 1)
+				returnData.push(thisData);
+			i -= 2;
+			reset(*thisData.end());
+			thisData.erase(thisData.end());
+		}
+	}
 	return returnData;
 }
 
-int Graph::nextNode(int nodeNum, vector<int> exception = {})
-{
-	for (node* pos = nodePour[nodeNum]; pos != nullptr; pos = pos->next)
-		if (parentNum[pos->data] != 0)
-		{
-			for (int& exceptPos : exception)
-				if (exceptPos == pos->data)
-					continue;
-			return pos->data;
-		}
-	return 0;
-}
-
-#endif //CODE__GRAPH_H
+#endif //UNTITLED__GRAPH_H

@@ -3,6 +3,12 @@
 using namespace std;
 int main()
 {
-	Graph g(10, "134.245.36.467.57.689.79:.89.9:.:");
+	Graph g;
+	g.setSize(4);
+	g.link(1,2);
+	g.link(1,3);
+	g.link(2,4);
+	g.link(3,4);
+	queue<vector<int>> data = g.TSort();
 	return 0;
 }
