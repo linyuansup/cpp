@@ -3,6 +3,7 @@
 #include <vector>
 #include <string>
 #include <stack>
+#include <commctrl.h>
 
 using namespace std;
 
@@ -17,9 +18,12 @@ private:
 	vector<node*> nodePour;
 	void deleteChild(node* parent);
 	~Graph();
+	int nextNode(int nodePos, vector<int> expection);
+	bool isZeroNode(int nodeName);
 public:
 	Graph() = default;
 	Graph(int n, string data);
+	vector<string> Tsort();
 };
 
 Graph::Graph(int n, string data)
@@ -28,7 +32,6 @@ Graph::Graph(int n, string data)
 	auto nodePourPos = nodePour.begin();
 	auto nowPos = *nodePourPos;
 	for (char& stringPos : data)
-	{
 		if (stringPos == '.')
 			nowPos = *(++nodePourPos);
 		else
@@ -37,7 +40,6 @@ Graph::Graph(int n, string data)
 			nowPos->data = stringPos - '0';
 			nowPos = nowPos->next;
 		}
-	}
 }
 
 void Graph::deleteChild(node* parent)
@@ -60,6 +62,22 @@ Graph::~Graph()
 {
 	for (auto& pos : nodePour)
 		deleteChild(pos);
+}
+
+vector<string> Graph::Tsort()
+{
+	vector<string> returnData;
+	return returnData;
+}
+
+int Graph::nextNode(int nodeNum, vector<int> expection = {})
+{
+	node* pos = nodePour[nodeNum];
+}
+
+bool Graph::isZeroNode(int nodeName)
+{
+
 }
 
 #endif //CODE__GRAPH_H
