@@ -16,18 +16,20 @@ private:
 		int data{};
 	};
 	vector<node*> nodePour;
+	vector<int> parentNum;
 	void deleteChild(node* parent);
-	~Graph();
-	int nextNode(int nodePos, vector<int> expection);
-	bool isZeroNode(int nodeName);
+	int nextNode(int nodeNum, vector<int> exception);
 public:
 	Graph() = default;
 	Graph(int n, string data);
 	vector<string> Tsort();
+	~Graph();
 };
 
 Graph::Graph(int n, string data)
 {
+	parentNum.insert(parentNum.begin(), n, 0);
+	parentNum.resize(n);
 	nodePour.resize(n);
 	auto nodePourPos = nodePour.begin();
 	auto nowPos = *nodePourPos;
@@ -39,13 +41,14 @@ Graph::Graph(int n, string data)
 			nowPos = new node;
 			nowPos->data = stringPos - '0';
 			nowPos = nowPos->next;
+			parentNum[stringPos - '0']++;
 		}
 }
 
 void Graph::deleteChild(node* parent)
 {
 	stack<node*> child;
-	if (parent != nullptr)
+	while (parent != nullptr)
 	{
 		child.push(parent);
 		parent = parent->next;
@@ -53,6 +56,7 @@ void Graph::deleteChild(node* parent)
 	while (!child.empty())
 	{
 		parent = child.top();
+		parentNum[parent->data]--;
 		delete[] parent;
 		child.pop();
 	}
@@ -67,17 +71,23 @@ Graph::~Graph()
 vector<string> Graph::Tsort()
 {
 	vector<string> returnData;
+	vector<int> path;
+	node* pos = nullptr;
+
 	return returnData;
 }
 
-int Graph::nextNode(int nodeNum, vector<int> expection = {})
+int Graph::nextNode(int nodeNum, vector<int> exception = {})
 {
-	node* pos = nodePour[nodeNum];
-}
-
-bool Graph::isZeroNode(int nodeName)
-{
-
+	for (node* pos = nodePour[nodeNum]; pos != nullptr; pos = pos->next)
+		if (parentNum[pos->data] != 0)
+		{
+			for (int& exceptPos : exception)
+				if (exceptPos == pos->data)
+					continue;
+			return pos->data;
+		}
+	return 0;
 }
 
 #endif //CODE__GRAPH_H
