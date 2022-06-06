@@ -18,6 +18,7 @@ private:
 	void set(int num);
 	void reset(int num);
 	int size;
+	vector<bool> used;
 };
 void Graph::link(int start, int end)
 {
@@ -30,24 +31,19 @@ void Graph::setSize(int n)
 		nodeData[i].resize(n);
 	choice.resize(n);
 	size = n;
+	used.resize(n);
+	fill(used.begin(), used.end(), false);
 }
 void Graph::getChoice(int num)
 {
-	bool temp = false;
-	num--;
-	for (int i = 0; i < size; i++)
+	int i, j;
+	for (i = 0; i < size; i++)
 	{
-		for (int j = 0; j < size; j++)
+		for (j = 0; j < size; j++)
 			if (nodeData[j][i] == 1)
-			{
-				temp = true;
 				break;
-			}
-		if (temp)
-		{
+		if (j == size && !used[i])
 			choice[num].push(i);
-			temp = false;
-		}
 	}
 }
 void Graph::reset(int num)
@@ -58,38 +54,46 @@ void Graph::reset(int num)
 			nodeData[num][i] = 0;
 		else
 			nodeData[num][i] = 1;
+	used[num] = false;
 }
 void Graph::set(int num)
 {
-	num--;
 	for (int i = 0; i < size; i++)
 		if (nodeData[num][i] == 0)
 			nodeData[num][i] = -2;
 		else
 			nodeData[num][i] = -1;
+	used[num] = true;
 }
 queue<vector<int>> Graph::TSort()
 {
 	queue<vector<int>> returnData;
 	vector<int> thisData;
 	int nowData;
-	for (int i = 0; i < size; i++)
+	bool needGetChoice = true;
+	for (int i = 0; i <= size; i++)
 	{
-		getChoice(i);
-		if (!(choice[i].empty()))
+		if (needGetChoice)
+			getChoice(i);
+		else
+			needGetChoice = true;
+		if (thisData.empty() && choice[0].empty())
+			break;
+		if (i == size || choice[i].empty())
+		{
+			if (i == size)
+				returnData.push(thisData);
+			i -= 2;
+			reset(thisData.back());
+			thisData.pop_back();
+			needGetChoice = false;
+		}
+		else
 		{
 			nowData = choice[i].front();
 			set(nowData);
-			thisData.insert(thisData.end(), nowData);
+			thisData.insert(thisData.end(), nowData + 1);
 			choice[i].pop();
-		}
-		if (i == size - 1 || choice[i].empty())
-		{
-			if (i == size - 1)
-				returnData.push(thisData);
-			i -= 2;
-			reset(*thisData.end());
-			thisData.erase(thisData.end());
 		}
 	}
 	return returnData;
