@@ -117,8 +117,44 @@ void log(const string& message)
 	time_t now = time(nullptr);
 	cout << ctime(&now) << message << endl;
 }
+void sort(const vector<int>& data, const string& logData)
+{
+	vector<int> temp = data;
+	log("bubbleSort, " + logData);
+	bubbleSort(temp);
+	temp = data;
+	log("quickSort, " + logData);
+	quickSort(temp);
+	temp = data;
+	log("mergeSort, " + logData);
+	mergeSort(temp);
+	temp = data;
+	log("shellSort, " + logData);
+	shellSort(temp);
+	temp = data;
+	log("chooseSort, " + logData);
+	chooseSort(temp);
+	temp = data;
+	log("insertSort, " + logData);
+	insertSort(temp);
+}
 int main()
 {
-	log("Hello world");
+	this_thread::sleep_for(chrono::milliseconds(1000));
+	for (int n = 100; n <= 1000000; n *= 10)
+	{
+		for (int i = 0; i < 3; i++)
+		{
+			log("Reading files of random, n = " + to_string(n) + ", i = " + to_string(i));
+			vector<int> data = readFile(("rand_" + to_string(n) + "_" + to_string(i) + ".txt").c_str());
+			sort(data, "n = " + to_string(n) + ", i = " + to_string(i));
+		}
+		log("Reading files of sorted, n = " + to_string(n));
+		vector<int> data = readFile(("sort_" + to_string(n) + ".txt").c_str());
+		sort(data, "n = " + to_string(n));
+		log("Reading files of reversed, n = " + to_string(n));
+		data = readFile(("reverse_" + to_string(n) + ".txt").c_str());
+		sort(data, "n = " + to_string(n));
+	}
 	return 0;
 }
