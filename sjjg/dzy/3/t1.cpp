@@ -139,7 +139,6 @@ void unzipFile(char* inFile, char* outFile)
 	HuffmanTree tree;
 	tree.insertData(freq);
 	string outString;
-	1
 	char c;
 
 	// read data and find the char
